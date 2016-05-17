@@ -1,0 +1,1196 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DecoAPI</name>
+    </assembly>
+    <members>
+        <member name="M:DecoAPI.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:DecoAPI.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:DecoAPI.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="T:DecoAPI.Areas.HelpPage.HelpPageAreaRegistration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageAreaRegistration.RegisterArea(System.Web.Mvc.AreaRegistrationContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.HelpPageAreaRegistration.AreaName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,DecoAPI.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:DecoAPI.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:DecoAPI.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DecoAPI.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:DecoAPI.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,DecoAPI.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,DecoAPI.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create one using <see cref="T:DecoAPI.Areas.HelpPage.ObjectGenerator"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},DecoAPI.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="T:DecoAPI.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:DecoAPI.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageSampleKey.#ctor(DecoAPI.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:DecoAPI.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:DecoAPI.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:DecoAPI.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,DecoAPI.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:DecoAPI.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:DecoAPI.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:DecoAPI.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:DecoAPI.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:DecoAPI.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:DecoAPI.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DecoAPI.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:DecoAPI.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:DecoAPI.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:DecoAPI.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:DecoAPI.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:DecoAPI.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DecoAPI.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="M:DecoAPI.CAR.CAR.#ctor(System.Int32)">
+            <summary>
+            Basic method to get CAR object with all fields. There will likely be other, more specified constructors for specific uses
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:DecoAPI.CAR.CAR.DaysOverdue">
+            <summary>
+            Return number of days CAR has been overdue
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.CAR.CAR.DaysSinceFinished">
+            <summary>
+            Return number of days since CAR was marked as complete
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.CARController.ValidateUser(System.String)">
+            <summary>
+            Method to validate username for currently not implemented auto-login feature
+            </summary>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.CARController.GetCar(System.String)">
+            <summary>
+            Method to get CAR object by id number
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.CARController.CreateCar(DecoAPI.CAR.CAR)">
+            <summary>
+            Method to create Corrective action request in database from CAR object
+            </summary>
+            <param name="car"></param>
+        </member>
+        <member name="M:DecoAPI.Controllers.DDCServiceController.VWUnitLabel(DecoAPI.DDCService.Message)">
+            <summary>
+            Method to print VW Service Unit Label from mold barcode scan
+            VW Box Labels are the same label format, with a different quantity and Label Stock, so they go through this method as well
+            </summary>
+            <param name="message">A Message class object, with values String Printer, String MoldLabel, String Error, int Quantity, bool Success</param>
+        </member>
+        <member name="M:DecoAPI.Controllers.DDCServiceController.VWChromeStrip(DecoAPI.DDCService.Message)">
+            <summary>
+            takes a message object with partlabel and printer
+            </summary>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.FinesseController.ValidateUser(System.String)">
+            <summary>
+            Method to validate Employee Badge Number
+            </summary>
+            <param name="badge"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.FinesseController.GetDefectCategories">
+            <summary>
+            Method to get all available Finesse defect categories
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.FinesseController.GetDefectTypes(System.Int32)">
+            <summary>
+            Method to get all defect types for a specifies defect category
+            </summary>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.LabelReprintController.ValidateUser(System.String)">
+            <summary>
+            Validate a user for LabelReprint Application
+            </summary>
+            <param name="badge"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.LabelReprintController.GetCustomers">
+            <summary>
+            Method to Return List of Customers for Label Reprinting
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.LabelReprintController.GetPrograms(DecoAPI.LabelReprint.Label)">
+            <summary>
+            Method to Return List of Programs for a Customer
+            </summary>
+            <param name="label"></param>
+            <returns></returns>    
+        </member>
+        <member name="M:DecoAPI.Controllers.LabelReprintController.GetStyles(DecoAPI.LabelReprint.Label)">
+            <summary>
+            Method to return List of Styles for a customer
+            </summary>
+            <param name="label"></param>
+            <returns></returns>    
+        </member>
+        <member name="M:DecoAPI.Controllers.LabelReprintController.GetParts(DecoAPI.LabelReprint.Label)">
+            <summary>
+            Method to return Mold parts for a Customer/Program combination
+            Currently returns Mold (mold), Mold Purchased (moldp), Mold Assembled (molda), and Mold Punched (punc100) parts marked active in pt master sql
+            </summary>
+            <param name="label"></param>
+            <returns></returns>        
+        </member>
+        <member name="M:DecoAPI.Controllers.LabelReprintController.GetColors(DecoAPI.LabelReprint.Label)">
+            <summary>
+            Method to return list of colors for a program
+            </summary>
+            <param name="label"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.LabelReprintController.PrintLabels(DecoAPI.LabelReprint.Label)">
+            <summary>
+            Method to print paint/mold label given a filled out label object
+            </summary>
+            <param name="label"></param>
+        </member>
+        <member name="M:DecoAPI.Controllers.LabelReprintController.PrintSmallHondaPartLabel(DecoAPI.LabelReprint.CustomerLabel)">
+            <summary>
+            Method to print Small Honda Part Labels for CustomerLabelPrinter application
+            </summary>
+            <param name="label"></param>
+        </member>
+        <member name="M:DecoAPI.Controllers.LabelReprintController.PrintLargeHondaPartLabel(DecoAPI.LabelReprint.CustomerLabel)">
+            <summary>
+            Method to print Large Honda Part Labels for CustomerLabelPrinter application
+            </summary>
+            <param name="label"></param>
+        </member>
+        <member name="M:DecoAPI.Controllers.LabelReprintController.PrintNissanServiceLabel(DecoAPI.LabelReprint.CustomerLabel)">
+            <summary>
+            Method to print Nissan Service Labels for CustomerLabelPrinter application
+            </summary>
+            <param name="label"></param>
+        </member>
+        <member name="M:DecoAPI.Controllers.LabelReprintController.PrintSmallGMServiceLabel(DecoAPI.LabelReprint.CustomerLabel)">
+            <summary>
+            Method to print Small GM Service Labels for CustomerLabelPrinter application
+            </summary>
+            <param name="label"></param>
+        </member>
+        <member name="M:DecoAPI.Controllers.PartLookupController.Test">
+            <summary>
+            test call
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.PartLookupController.GetScanType(System.String)">
+            <summary>
+            Determine Single/Double scan status for part
+            </summary>
+            <param name="paintLabel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.UnloadController.OpenPartial(System.String)">
+            <summary>
+            Method to open partial rack from Rack or paint label scan. Throws exception if no rack opened
+            </summary>
+            <param name="scan"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.UnloadController.Process(DecoAPI.Unload.Session)">
+            <summary>
+            Method to determine the single/double scan status of a label
+            </summary>
+            <param name="session"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.UnloadController.PassLabel(DecoAPI.Unload.Session)">
+             <summary>
+            
+             </summary>
+             <param name="session"></param>
+             <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.WarehouseController.ValidateUser(System.String)">
+            <summary>
+            Method to Validate a user by Badge Scan
+            </summary>
+            <param name="badge"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Controllers.WarehouseController.MoldWarehouseIn(System.String)">
+            <summary>
+            Method to process racks scanned into the Mold Warehouse
+            </summary>
+            <param name="scan">WIP Label number scanned from Rack</param>
+        </member>
+        <member name="M:DecoAPI.Controllers.WarehouseController.SouthWarehouseIn(System.String)">
+            <summary>
+            Method to Process racks scanned into the South Warehouse (ie, outside)
+            </summary>
+            <param name="scan"></param>
+        </member>
+        <member name="M:DecoAPI.Controllers.WarehouseController.PaintLineIn(System.String)">
+            <summary>
+            Method to handle racks scanned out of the Mold Warehouse/Into the Paint Line/Load Deck
+            </summary>
+            <param name="scan"></param>
+        </member>
+        <member name="M:DecoAPI.Controllers.WarehouseController.ShipWarehouseIn(System.String)">
+            <summary>
+            Method to process racks scanned into the Shipping Warehouse
+            </summary>
+            <param name="scan"></param>
+        </member>
+        <member name="M:DecoAPI.Controllers.WarehouseController.ShipWarehouseOut(System.String)">
+            <summary>
+            Method to process racks scanned out of the Shipping Warehouse (Obsolete due to DO shipping App?)
+            </summary>
+            <param name="scan"></param>
+        </member>
+        <member name="M:DecoAPI.Controllers.WarehouseController.AssembyWarehouseIn(System.String)">
+            <summary>
+            Method to process racks scanned into the assembly warehouse
+            </summary>
+            <param name="scan"></param>
+        </member>
+        <member name="M:DecoAPI.Email.Email.SendMail">
+            <summary>
+            Method to send email messages, given address and message contents
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Employees.Employee.ValidateEmployee(System.String)">
+            <summary>
+            Validate Employee by Badge Number
+            </summary>
+            <param name="badge"></param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:DecoAPI.Employees.Employee.CheckLabelReprintUserList(System.String)">
+            <summary>
+            Check if a user has permission to reprint Paint/Mold Labels
+            </summary>
+            <param name="badge"></param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:DecoAPI.Employees.Employee.GetEmployeeName(System.String)">
+            <summary>
+            Method to return Employee's name given badge number
+            </summary>
+            <param name="badge"></param>
+            <returns>Employee name in format: "firstname lastname"</returns>
+        </member>
+        <member name="M:DecoAPI.LabelReprint.DataHandler.GetCustomerList">
+            <summary>
+            Method to Return List of Customers
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.LabelReprint.DataHandler.GetCustomerNumber(System.String)">
+            <summary>
+            Method to return two digit customer code by customer name
+            </summary>
+            <param name="customer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.LabelReprint.DataHandler.GetProgramNumber(System.String)">
+            <summary>
+            Method to look up Program Code by Program Name
+            </summary>
+            <param name="program"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.LabelReprint.DataHandler.GetProgramList(System.String)">
+            <summary>
+            Method to look up all Programs for a given Customer
+            </summary>
+            <param name="customer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.LabelReprint.DataHandler.GetStyleList(System.String)">
+            <summary>
+            Method to look up all Styles for a given Customer
+            </summary>
+            <param name="customer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.LabelReprint.DataHandler.GetPartList(System.String,System.String)">
+            <summary>
+            Method to look up Mold Parts for a given Customer and Program
+            </summary>
+            <param name="customer"></param>
+            <param name="program"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.LabelReprint.DataHandler.GetColorList(System.String)">
+            <summary>
+            Method to return all colors associated with a given program
+            </summary>
+            <param name="program"></param>
+            <returns></returns>
+        </member>
+        <member name="P:DecoAPI.LabelReprint.Label.Customer">
+            <summary>
+            Name of Customer
+            </summary>
+        </member>
+        <member name="P:DecoAPI.LabelReprint.Label.Program">
+            <summary>
+            Name of Program
+            </summary>
+        </member>
+        <member name="P:DecoAPI.LabelReprint.Label.Style">
+            <summary>
+            Object containing information about a paintlabel's selected Style
+            </summary>
+        </member>
+        <member name="P:DecoAPI.LabelReprint.Label.Color">
+            <summary>
+            Object containing information about a paintlabel's selected Color
+            </summary>
+        </member>
+        <member name="P:DecoAPI.LabelReprint.Label.Part">
+            <summary>
+            Object containing information about a moldlabel's selected Part
+            </summary>
+        </member>
+        <member name="P:DecoAPI.LabelReprint.Label.Quantity">
+            <summary>
+            Quantity of labels to be printed
+            </summary>
+        </member>
+        <member name="P:DecoAPI.LabelReprint.Label.LabelType">
+            <summary>
+            Type of label to be printed (mold or paint)
+            </summary>
+        </member>
+        <member name="P:DecoAPI.LabelReprint.Label.UserName">
+            <summary>
+            name of user who authorized printing of label
+            </summary>
+        </member>
+        <member name="P:DecoAPI.LabelReprint.Label.PrinterID">
+            <summary>
+            ID number of printer labels should print at
+            </summary>
+        </member>
+        <member name="P:DecoAPI.LabelReprint.Label.Ribbon">
+            <summary>
+            Boolean value for Ribbon Printing
+            True for Ribbon, False for Thermal
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Models.AbstractRack.#ctor(System.String,System.Int32)">
+            <summary>
+            Create a New Rack.
+            </summary>
+            <param name="partNumber">Part Number</param>
+            <param name="quantity">Quantity on the Rack</param>
+        </member>
+        <member name="M:DecoAPI.Models.AbstractRack.#ctor(System.String,System.Int32,System.String)">
+            <summary>
+            Create new rack
+            </summary>
+            <param name="partNumber"></param>
+            <param name="quantity"></param>
+            <param name="shipLocation"></param>
+        </member>
+        <member name="M:DecoAPI.Models.AbstractRack.#ctor(System.Int32)">
+            <summary>
+            Find an already existing rack with the given identification number and
+             populate the rack object with that rack's information.
+            </summary>
+            <param name="rackID">Rack ID of existing rack</param>
+        </member>
+        <member name="M:DecoAPI.Models.AbstractRack.#ctor(System.Int32,System.String)">
+            <summary>
+            Find an already existing rack with the given identification number and
+             populate the rack object with that rack's information.
+            </summary>
+            <param name="rackID">Rack ID of existing rack</param>
+            <param name="rackType">Type of rack, used to determine table used for lookup.</param>
+        </member>
+        <member name="P:DecoAPI.Models.AbstractRack.ServiceRack">
+            <summary>
+            Accessor/Mutator for Service Rack boolean
+            </summary>
+        </member>
+        <member name="P:DecoAPI.Models.AbstractRack.PurchaseOrder">
+            <summary>
+            Overwrites RAN
+            </summary>
+        </member>
+        <member name="P:DecoAPI.Models.AbstractRack.RAN">
+            <summary>
+            Overwrites PurchaseOrder
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Models.Database.RunCommandReturnReader(System.Data.SqlClient.SqlCommand)">
+            <summary>
+            Default run command. Assumes query directed to DecoSql02, aka the main production database
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Models.Database.SafeGetString(System.String)">
+            <summary>
+            Method to safely withdraw nullable string values from database
+            </summary>
+            <param name="reader"></param>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Models.Database.SafeGetDate(System.String)">
+            <summary>
+            Method to safely withdraw nullable date values from database
+            </summary>
+            <param name="field"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Models.Database.RunSingleResultQuery(System.Data.SqlClient.SqlCommand)">
+            <summary>
+            Method to return a string from a SqlCommand. Useful for queries that expect a single string return value
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Models.Database.OpenConnection">
+            <summary>
+            Method to open Sql Connection
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Models.Database.CloseConnection">
+            <summary>
+            Method to Close Sql Connection
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Models.Paint.GetPartNumberByStyle(System.String)">
+            <summary>
+            Method to look up base part number by style code
+            </summary>
+            <param name="style"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Models.Paint.GetPartNumberXRefByObj(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="style"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Models.Paint.GetOptionedPartNumber(System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sCarrier"></param>
+            <param name="sCreateDate"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DecoAPI.Models.Part">
+            <summary>
+            Summary description for part.
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Models.Part.GetByMoldPartAndPaintScan(System.String,System.String,DecoAPI.Models.PartType)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DecoAPI.Models.Rack">
+            <summary>
+            This class is mainly used by the Warehouse application; to move racks between warehouses in the plant.
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Models.Rack.GetRack(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="RackID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Models.Rack.ChangeRackLastLoc(System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="RackID"></param>
+            <param name="LastLocation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Models.Rack.GetWIPRack(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="WIPRackID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Models.Rack.ChangeWIPLastLoc(System.Int64,System.String)">
+            <summary>
+            Change the location of a WIP rack in MES
+            </summary>
+            <param name="wipID"></param>
+            <param name="LastLocation"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DecoAPI.Models.rackType">
+            <summary>
+            Rack Type. Based on source of molded part
+            </summary>
+        </member>
+        <member name="T:DecoAPI.Models.WIPRackType">
+            <summary>
+            Work on Progress (WIP) Rack.
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Models.RackFactory.Make(System.String,System.Int32)">
+            <summary>
+            Creates a new Rack using a part number and quantity on the rack.
+            </summary>
+            <param name="partNumber">Part on the rack</param>
+            <param name="quantity">Quantity of parts on the rack</param>
+            <returns>Gives back a Rack Object</returns>
+        </member>
+        <member name="M:DecoAPI.Models.RackFactory.Make(System.String,System.Int32,System.String)">
+            <summary>
+            Creates a new Rack using a part number, a quantity, and a ship location
+            </summary>
+            <param name="partNumber">Part on the rack</param>
+            <param name="quantity">Quantity of parts on the rack</param>
+            <param name="shipLocation">The location that the rack will ship</param>
+            <returns>Gives back a Rack Object</returns>
+        </member>
+        <member name="M:DecoAPI.Models.RackFactory.Make(System.Int32)">
+            <summary>
+            Create a rack using an already existing Rack ID
+            </summary>
+            <param name="rackID">Rack ID used to populate the data.</param>
+            <returns>Gives back a Rack Object</returns>
+        </member>
+        <member name="M:DecoAPI.Models.RackFactory.Make(System.Int32,System.String)">
+            <summary>
+            Create a rack using an already existing Rack ID
+            </summary>
+            <param name="rackID">Rack ID used to populate the data.</param>
+            <param name="rackType">Type of rack, determining table used for lookup.</param>
+            <returns>Gives back a Rack Object</returns>
+        </member>
+        <member name="M:DecoAPI.Models.RackFactory.IsValidRack(System.String)">
+            <summary>
+            Method to validate that scan is a valid rack label
+            </summary>
+            <param name="rack"></param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:DecoAPI.Models.RackFactory.StripRack(System.String)">
+            <summary>
+            Method to strip out rack identifiers, leaving the rack #
+            </summary>
+            <param name="scan"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Models.Transactions.CreateInventoryTransfer(System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            Method to conduct Inventory Transfer
+            </summary>
+            <param name="transactionType"></param>
+            <param name="partNumber"></param>
+            <param name="quantity"></param>
+            <param name="fromSite"></param>
+            <param name="fromLocation"></param>
+            <param name="toSite"></param>
+            <param name="toLocation"></param>
+            <param name="rackID"></param>
+            <param name="rackQuantity"></param>
+            <param name="application"></param>
+        </member>
+        <member name="M:DecoAPI.Models.Transactions.CreateRBE(System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            Method to conduct RBE transaction
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Models.Transactions.CreateDropFile(System.Boolean,System.String,System.String,System.String,System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            Create dropfile for inventory transaction
+            </summary>
+            <param name="inv"></param>
+            <param name="dropLocation"></param>
+            <param name="transactionType"></param>
+            <param name="partNumber"></param>
+            <param name="quantity"></param>
+            <param name="fromSite"></param>
+            <param name="fromLocation"></param>
+            <param name="toSite"></param>
+            <param name="toLocation"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintRehauPartLabel(System.String,System.String)">
+            <summary>
+            Used to print Rehaue Label for Unload App
+            </summary>
+            <param name="partNumber"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintPassLabel(System.String,System.String,System.String)">
+            <summary>
+            Prints a Pass label for BMW or GM
+            </summary>
+            <param name="sPartNumber"></param>
+            <param name="location"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintNissanServiceLabel(System.String,System.String)">
+            <summary>
+            Prints a Service Label for Nissan
+            </summary>
+            <param name="partNumber"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintSmallGMServiceLabel(System.String,System.Int32,System.String)">
+            <summary>
+            Prints a Small GM Service Label
+            </summary>
+            <param name="partNumber"></param>
+            <param name="quantity"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintLargeGMServiceLabel(System.String,System.Int32,System.String)">
+            <summary>
+            Prints a Large GM Service Label
+            </summary>
+            <param name="partNumber"></param>
+            <param name="quantity"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintSmallGMDOTLabel(System.String,System.Int32,System.String)">
+            <summary>
+            Prints a Small GM DOT Label
+            </summary>
+            <param name="partNumber"></param>
+            <param name="quantity"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintLargeGMDOTLabel(System.String,System.Int32,System.String)">
+            <summary>
+            Prints a Large GM DOT Label
+            </summary>
+            <param name="partNumber"></param>
+            <param name="quantity"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintLargeHondaPartLabel(System.String,System.String)">
+            <summary>
+            Prints a Large Honda Part Label
+            </summary>
+            <param name="partNumber"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintSmallHondaPartLabel(System.String,System.String)">
+            <summary>
+            Prints a Small Honda Part Label
+            </summary>
+            <param name="partNumber"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintPartLabel(System.String,System.String)">
+            <summary>
+            Prints a Pass label for BMW or GM
+            </summary>
+            <param name="partNumber"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintPartLabel(System.String,System.String,System.String,System.String)">
+            <summary>
+            Prints a Part label for BMW or GM or KIA. This method also updates the AssemblyRecords Database
+            </summary>
+            <param name="partNumber"></param>
+            <param name="sLocation"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintKIAPartLabel(System.String,System.String,System.String,System.String)">
+            <summary>
+            Prints a Part label for KIA
+            </summary>
+            <param name="partNumber"></param>
+            <param name="sLocation"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintKIAServicePartLabel(System.String,System.String,System.String,System.String)">
+            <summary>
+            Prints a Service Part label for KIA
+            </summary>
+            <param name="partNumber"></param>
+            <param name="sLocation"></param>
+            <param name="printer"></param>
+        </member>
+        <member name="M:DecoAPI.Printers.MiscellaneousLabelPrinter.PrintF25PartLabel(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Prints an F25 Pass Label
+            </summary>
+            <param name="serial">Label Serial</param>
+            <param name="printer">Printer Number</param>
+        </member>
+        <member name="M:DecoAPI.Printers.PrintFactory.Select(DecoAPI.Models.AbstractRack,DecoAPI.Printers.Label,System.String,System.String)">
+            <summary>
+            Call to print a WIP or Rack label
+            </summary>
+            <param name="rack">Rack/Rack object you wish to print</param>
+            <param name="type"></param>
+            <param name="printer"></param>
+            <param name="application"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Printers.PrintHandler.SendToPrinter(System.String)">
+            <summary>
+            Sends IPL to IP address specified
+            </summary>
+            <param name="ipl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Unload.RackCreator.ProcessSession">
+            <summary>
+            Method to process a session object.
+            </summary> 
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Unload.RackCreator.SingleScan(System.String,System.Int32)">
+            <summary>
+            Method to Resolve a single scan to a Part
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Unload.RackCreator.DoubleScan">
+            <summary>
+            Method to Resolve a double scan to a Part
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Unload.RackCreator.ProcessPart">
+            <summary>
+            Method to process a part (once label(s) are resolved to a part)
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Unload.RackCreator.PassLabel(DecoAPI.Models.sPart)">
+            <summary>
+            
+            </summary>
+            <param name="part"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Unload.RackCreator.AddNewRack">
+            <summary>
+            Method to create a new rack
+            </summary>
+        </member>
+        <member name="M:DecoAPI.Unload.RackCreator.InsertUniqueID(System.String,System.String)">
+            <summary>
+            Method to insert part into Unique Id table
+            </summary>
+            <param name="paintLabel"></param>
+            <param name="partNumber"></param>
+        </member>
+        <member name="M:DecoAPI.Unload.RackCreator.IsC6Part(DecoAPI.Models.sPart)">
+            <summary>
+            C6 is a corvette part
+            </summary>
+            <param name="part"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Unload.RackCreator.CheckDuplicate(System.String)">
+            <summary>
+            Check that the part is not already scanned to the Rack
+            </summary>
+            <param name="paintLabel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DecoAPI.Unload.RackCreator.CompareRackAndPart(System.String)">
+            <summary>
+            Method to ensure that a part is scanned to a rack of that part type
+            </summary>
+            <param name="partNumber"></param>
+            <returns>True if Rack and part match, false otherwise</returns>
+        </member>
+        <member name="M:DecoAPI.Unload.RackCreator.PrintRack">
+            <summary>
+            Method to print a rack
+            </summary>
+        </member>
+    </members>
+</doc>
